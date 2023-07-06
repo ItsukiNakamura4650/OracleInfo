@@ -50,9 +50,9 @@ public class MemoController {
 			if(url.indexOf("list.do") != -1) {
 				System.out.println("list.do処理開始");
 //				DAOの全検索メソッドを使い、議事録情報をサーブレットに持ってくる
-				map = memoDao.memberList();
+				map = memoDao.list();
 //				リストをリクエストスコープに格納してjspに送る準備をする
-				request.setAttribute("memoList", memberList);
+				request.setAttribute("memoList", map);
 
 //				ページ移動
 				String page = "/memo/list.jsp";
@@ -65,13 +65,13 @@ public class MemoController {
 				if(bRet == false) return;
 
 //				mapに画面から取得したパラメータをセットする
-				map.put(writer, writer);
-				map.put(purpose, purpose);
-				map.put(location, location);
-				map.put(attendee, attendee);
-				map.put(memo, memo);
-				map.put(conclusion, conclusion);
-				map.put(post_date, post_date);
+				map.put("writer", writer);
+				map.put("purpose", purpose);
+				map.put("location", location);
+				map.put("attendee", attendee);
+				map.put("memo", memo);
+				map.put("conclusion", conclusion);
+				map.put("post_date", post_date);
 
 //				レコードの追加
 				memoDao.insert(map);
@@ -130,5 +130,5 @@ public class MemoController {
 		rd.forward(request, response);
 	}
 
-	
+
 }
