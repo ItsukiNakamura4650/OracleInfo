@@ -2,8 +2,43 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="memo/MemoDAO.java">
-  <select id="select" resultType="map">
-    SELECT * FROM memo
+<mapper namespace="src.memo.MemoDAO.java">
+
+
+  <select id="select" resultMap="ResultMap">
+    SELECT * FROM memo;
 	</select>
+
+	  <select id="detail" resultMap="detailResultMap" >
+    SELECT * FROM memo WHERE idx = #{idx};
+	</select>
+
+	  <insert id="detail">
+    INSERT INTO memo (
+        idx,writer,purpose,location,attendee,memo,conclusion
+	) VALUES (
+         #{idx},#{writer},#{purpose},#{location},
+			#{attendee},#{memo},#{conclusion}
+	);
+	</insert>
+
+	<delete id="detail" >
+    DELETE FROM memo idx = #{idx};
+	</delete>
+
+
+    <update id="update" >
+    update memo
+		set
+			writer=#{writer},
+			puropse=#{puropse},
+			location=#{location},
+			memo=#{memo},
+			conclusion=#{conclusion}
+		where idx=#{idx};
+	</update>
+
+
+
+
 </mapper>
