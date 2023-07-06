@@ -13,17 +13,17 @@ public class MemoDAO {
 	}
 
 //	一件登録
-	public void insert(ProductDTO productDTO) {
+	public void insert(Map<String, String> productDTO) {
 		sqlSession.insert("product.insert", productDTO);
 	}
 
 //	詳細取得
-	public ProductDTO detail(String product_code) {
-		return sqlSession.selectOne("product.detail", product_code);
+	public Map<String, String> detail(String idx) {
+		return sqlSession.selectOne("product.detail", idx);
 	}
 
 //	1件更新
-	public void update(ProductDTO productDTO) {
+	public void update(Map<String, String> productDTO) {
 		sqlSession.update("product.update", productDTO);
 	}
 
