@@ -14,43 +14,43 @@
 </head>
 <body>
 <div class="container mt-5" >
-<h2 class="text-center"></h2>
+<h2 class="text-center">議事録情報詳細</h2>
 <form>
 <table class="table table-hover">
 	<tr>
-		<td></td>
-		<td><input class="form-control" readonly></td>
+		<td>番号</td>
+		<td><input type="number" class="form-control" readonly>${memo.number }</td>
 	</tr>
 	<tr>
-		<td></td>
-		<td><input class="form-control"></td>
+		<td>会議の目的</td>
+		<td><input type="text" name="text" class="form-control"></td>
 	</tr>
 	<tr>
-		<td></td>
-		<td><input class="form-control"></td>
+		<td>場所</td>
+		<td><input type="text" name="text" class="form-control"></td>
 	</tr>
 	<tr>
-		<td></td>
-		<td><input class="form-control"></td>
+		<td>作成者</td>
+		<td><input type="text" name="name" class="form-control"></td>
 	</tr>
 	<tr>
-		<td></td>
-		<td><input class="form-control"></td>
+		<td>出席者</td>
+		<td><input type="text" name="text" class="form-control"></td>
 	</tr>
 	<tr>
-		<td></td>
-		<td><input class="form-control"></td>
+		<td>議事録情報</td>
+		<td><input type="text" name="text" class="form-control"></td>
 	</tr>
 	<tr>
-		<td></td>
-		<td><input class="form-control"></td>
+		<td>決定事項</td>
+		<td><input type="text" name="text" class="form-control"></td>
 	</tr>
 	<tr align="center">
 		<td colspan="2">
 			<input>
-			<input class="btn btn-link">
-			<input class="btn btn-warning">
-			<input class="btn btn-danger">
+			<input type="submit" value="戻る" class="btn btn-link">
+			<input type="submit" value="修正" class="btn btn-warning">
+			<input type="submit" value="削除" class="btn btn-danger">
 		</td>
 	</tr>
 </table>

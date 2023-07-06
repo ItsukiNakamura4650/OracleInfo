@@ -1,4 +1,4 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,26 +17,30 @@
 
 
 		登録された議事録情報はありません。
-		<form>
+		<form method="post">
+		<a href="/MemoInfoOracle3/memo_servlet/list.do">議事録情報一覧</a>
 		<table class="table table-hover">
 			<tr>
-				<th><input></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th><input class="btn btn-dark"></th>
+				<th><input type="checkbox"></th>
+				<th>番号</th>
+				<th>会議の目的</th>
+				<th>場所</th>
+				<th>作成者</th>
+				<th>日付</th>
+				<th><input type="button" value="選択した議事録情報を削除" class="btn btn-dark"></th>
 			</tr>
+
+		<c:forEach items="${memoList }" var="memo">
 			<tr>
-				<td><input></td>
+				<td><input type="checkbox"></td>
 				<td></td>
-				<td><a><span class="d-inline-block text-truncate" style="max-width: 150px;"></span></a></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input class="btn btn-danger"></td>
+				<td><a href="#" onclick="detail('${memo.idx}')">${memo.purpose }<span class="d-inline-block text-truncate" style="max-width: 150px;"></span></a></td>
+				<td>${ memo.location }</td>
+				<td>${ memo.writer }</td>
+				<td>${memo.post_date}</td>
+				<td><input type="button" value="削除" class="btn btn-danger"></td>
 			</tr>
+		</c:forEach>
 		</table>
 		</form>
 
