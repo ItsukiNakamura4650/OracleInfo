@@ -120,6 +120,14 @@ public class MemoController {
 
 				response.sendRedirect(context + "/memo_servlet/list.do");
 				System.out.println("delete.do処理終了");
+			}else if (url.indexOf("search.do")!= -1) {
+				System.out.println("search.do処理開始");
+
+
+				memoDao.delete(idx);
+
+				response.sendRedirect(context + "/memo_servlet/list.do");
+				System.out.println("delete.do処理終了");
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
