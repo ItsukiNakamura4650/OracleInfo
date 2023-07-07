@@ -43,7 +43,7 @@ public class MemoDAO {
 	}
 
 //	一件削除
-	public void delete(int idx) {
+	public void delete(String idx) {
 		sqlSession.delete("product.delete", idx);
 	}
 

@@ -10,11 +10,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.MemberDTO;
-import dao.DAOException;
-
 @WebServlet("/memo_servlet/*")
 public class MemoController {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response)
+					throws ServletException, IOException {
+		doPost(request, response);
+	}
+
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response)
 					throws ServletException, IOException {
@@ -84,10 +87,10 @@ public class MemoController {
 				System.out.println("詳細画面で表示するユーザーのID: " + idx);
 
 //				画面から受け取ったIDをもとに詳細画面を表示するユーザーの詳細情報をDBからもってくる
-				MemberDTO memberDto = memoDao.memberDetail(idx);
+				map = memoDao.detail(idx);
 
-				request.setAttribute("memberDto", memberDto);
-				String page = "/member/detail.jsp";
+				request.setAttribute("map", map);
+				String page = "/memo/memo.jsp";
 				goToPage(request, response, page);
 				System.out.println("detail.do処理終了");
 
@@ -97,11 +100,16 @@ public class MemoController {
 				boolean bRet = dataValidation(request,response,writer,purpose,location,attendee,memo,conclusion,post_date);
 				if(bRet == false) return;
 
-//				MemberDTOに画面から取得したパラメータをセットする
-				MemberDTO memberDto
-					= new MemberDTO(userId ,password, name, gender, birthday, job, tel, email, address);
+//				mapに画面から取得したパラメータをセットする
+				map.put("writer", writer);
+				map.put("purpose", purpose);
+				map.put("location", location);
+				map.put("attendee", attendee);
+				map.put("memo", memo);
+				map.put("conclusion", conclusion);
+				map.put("post_date", post_date);
 
-				memoDao.update(memberDto);
+				memoDao.update(map);
 
 				response.sendRedirect(context + "/memo_servlet/list.do");
 				System.out.println("update.do処理終了");
@@ -113,7 +121,7 @@ public class MemoController {
 				response.sendRedirect(context + "/memo_servlet/list.do");
 				System.out.println("delete.do処理終了");
 			}
-		}catch(DAOException e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 //			画面に表示するエラー
 			request.setAttribute("message", "内部エラーが発生しました。");
